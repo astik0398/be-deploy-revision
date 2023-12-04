@@ -20,6 +20,18 @@ userRouter.post('/contacts', async(req, res)=> {
     }
 })
 
+userRouter.delete('/delete/:id', async(req, res)=> {
+    try {
+        const {id} = req.params
+    // const note = await userModel.findOne({_id: id})
+
+    await userModel.findByIdAndDelete({_id: id})
+    res.send({"msg": 'user has been deleted'})
+    } catch (error) {
+        res.send({"msg": "unable to delete"})
+    }
+})
+
 module.exports = {
     userRouter
 }
